@@ -57,19 +57,19 @@ void textfile::refresh( int mode ){
 
 textfile::textfile(){
     text.push_back("");
+    old_text = text;
     ul = x = y = 0;
-    is_changed = 0;
     refresh(NORMAL_MODE);
 }
 
 textfile::textfile( string fname ){
     filename = fname;
     ul = x = y = 0;
-    is_changed = 0;
 
     std::ifstream fin(fname);
     if ( !fin.is_open() ){
         text.push_back("");
+        old_text = text;
         return;
     }
 
@@ -78,13 +78,37 @@ textfile::textfile( string fname ){
         std::getline(fin, s);
         text.push_back(s);
     }
+    old_text = text;
     refresh(NORMAL_MODE);
 }
 
-void textfile::save(){
+bool textfile::save( string fname ){
+    if ( fname != "" ) filename = fname;
+    if ( filename == "" ){
+        wclear(infowin);
+        wprintw(infowin, "No file name.");
+        wrefresh(infowin);
+        return 0;
+    }
     std::ofstream fout(filename);
-    if ( !fout.is_open() ) return;
+    if ( !fout.is_open() ){
+        wclear(infowin);
+        wprintw(infowin, "Unable to open %s.", filename.c_str());
+        wrefresh(infowin);
+        return 0;
+    }
+    old_text = text;
     for ( int i = 0; i < text.size(); ++i )
         fout << text[i] + "\n";
-    is_changed = 0;
+    wclear(infowin);
+    wprintw(infowin, "%s saved successfully.", filename.c_str());
+    return 1;
+}
+
+bool textfile::is_changed(){
+    if ( text.size() != old_text.size() ) return 0;
+    for ( int i = 0; i < text.size(); ++i )
+        if ( text[i] != old_text[i] )
+            return 1;
+    return 0;
 }

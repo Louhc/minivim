@@ -24,9 +24,9 @@ int min( int, int );
 class textfile{
     private:
         vector<string> text;
+        vector<string> old_text;
         string filename;
         int x, y, ul, tx, ty;
-        bool is_changed;
 
         node getPos( int, int, int );
         string getNthLine( int );
@@ -34,7 +34,7 @@ class textfile{
         void refresh( int ); // refresh the window. If in insert_mode, use refresh(1)
         textfile();
         textfile( string );
-        void save();
+        bool save( string );
         void insert_to_normal();
         void go_up( int );
         void go_down( int );
@@ -44,6 +44,7 @@ class textfile{
         void enter();
         void insert( char );
         void deleteline();
+        bool is_changed();
 };
 
 void NormalMode( textfile* );

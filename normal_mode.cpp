@@ -20,6 +20,7 @@ void NormalMode( textfile *txt ){
                 break;
             case ':':
                 if ( CommandMode(txt) ) return;
+                txt->refresh(NORMAL_MODE);
                 break;
             case 'i':
                 InsertMode(txt);

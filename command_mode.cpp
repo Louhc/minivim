@@ -6,6 +6,7 @@
 extern WINDOW *txtwin, *infowin, *cmdwin;
 
 int CommandMode( textfile *txt ){
+    wclear(cmdwin);
     wprintw(cmdwin, ":");
     wrefresh(cmdwin);
     std::string cmd;
@@ -23,15 +24,24 @@ int CommandMode( textfile *txt ){
     wclear(cmdwin);
     wrefresh(cmdwin);
     if ( cmd == "w" ){
-        return 1;
+        txt->save("");
+        getch();
+        return 0;
     } else if ( cmd == "q" ){
-        return 1;
+        if ( !txt->is_changed() ) return 1;
+        wclear(infowin);
+        wprintw(infowin, "File not saved (add ! to override)");
+        wrefresh(infowin);
+        getch();
+        return 0;
     } else if ( cmd == "q!" ){
         return 1;
     } else if ( cmd == "wq" ){
-        return 1;
+        if ( txt->save("") ) return 1;
+        getch();
+        return 0;
     } else {
-        return 1;
+        return 0;
     }
     return 0;
 }
