@@ -28,13 +28,13 @@ class textfile{
         string filename;
         int x, y, ul, tx, ty;
         bool readonly_on;
+        bool truncate_on;
 
         node getPos( int, int, int );
         string getNthLine( int );
     public:
         void refresh( int ); // refresh the window. If in insert_mode, use refresh(1)
-        textfile( bool );
-        textfile( string, bool );
+        textfile( string, bool, bool );
         bool save( string );
         void insert_to_normal();
         void go_up( int );
@@ -47,6 +47,7 @@ class textfile{
         void deleteline();
         bool is_changed();
         bool is_read_only();
+        bool is_truncate();
 };
 
 void NormalMode( textfile* );

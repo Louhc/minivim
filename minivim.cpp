@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 #include "minivim.h"
+#include <unistd.h>
 using std::vector;
 using std::string;
 
@@ -11,6 +12,7 @@ using std::string;
 #define CUS_COLOR_NUM 2
 
 WINDOW *txtwin, *infowin, *cmdwin;
+// extern int optind;
 
 int main( int argc, char *argv[] ){
     initscr(); /* Start curses mode */
@@ -33,7 +35,23 @@ int main( int argc, char *argv[] ){
     wbkgd(txtwin, COLOR_PAIR(CUS_COLOR_NUM)); /*set customized window color*/
     wrefresh(txtwin);
 
-    textfile *txt = argc > 1 ? new textfile(argv[argc - 1], 0) : new textfile(0);
+    int opt;
+    bool is_readonly = 0, is_truncate = 0;
+    string fname = "";
+
+    while( (opt = getopt(argc, argv, "tR")) != -1 ){
+        switch( opt ){
+            case 't':
+                is_truncate = 1;
+                break;
+            case 'R':
+                is_readonly = 1;
+                break;
+        }
+    }
+    if ( optind < argc ) fname = argv[optind];
+    
+    textfile *txt = new textfile(fname, is_readonly, is_truncate);
     NormalMode(txt);
 
     // End curses mode

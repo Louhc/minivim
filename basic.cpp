@@ -55,23 +55,24 @@ void textfile::refresh( int mode ){
     wrefresh(txtwin);
 }
 
-textfile::textfile( bool flg ){
-    text.push_back("");
-    old_text = text;
-    ul = x = y = 0;
-    readonly_on = flg;
-    refresh(NORMAL_MODE);
-}
-
-textfile::textfile( string fname, bool flg ){
+textfile::textfile( string fname, bool flg1, bool flg2 ){
     filename = fname;
     ul = x = y = 0;
-    readonly_on = flg;
+    readonly_on = flg1;
+    truncate_on = flg2;
+
+    if ( fname == "" ){
+        text.push_back("");
+        old_text = text;
+        refresh(NORMAL_MODE);
+        return;
+    }
 
     std::ifstream fin(fname);
     if ( !fin.is_open() ){
         text.push_back("");
         old_text = text;
+        refresh(NORMAL_MODE);
         return;
     }
 
@@ -120,5 +121,10 @@ bool textfile::is_read_only(){
     wclear(infowin);
     wprintw(infowin, "Unable to modify a read_only file!");
     wrefresh(infowin);
+    getch();
     return 1;
+}
+
+bool textfile::is_truncate(){
+    return truncate_on;
 }
