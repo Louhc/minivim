@@ -23,8 +23,11 @@ void NormalMode( textfile *txt ){
                 txt->refresh(NORMAL_MODE);
                 break;
             case 'i':
-                InsertMode(txt);
-                txt->insert_to_normal();
+                if ( !(txt->is_read_only()) ){
+                    InsertMode(txt);
+                    txt->insert_to_normal();
+                }
+                txt->refresh(NORMAL_MODE);
                 break;
         }
 

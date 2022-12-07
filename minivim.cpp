@@ -33,7 +33,7 @@ int main( int argc, char *argv[] ){
     wbkgd(txtwin, COLOR_PAIR(CUS_COLOR_NUM)); /*set customized window color*/
     wrefresh(txtwin);
 
-    textfile *txt = argc > 1 ? new textfile(argv[argc - 1]) : new textfile();
+    textfile *txt = argc > 1 ? new textfile(argv[argc - 1], 0) : new textfile(0);
     NormalMode(txt);
 
     // End curses mode
