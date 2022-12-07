@@ -11,4 +11,3 @@ This is a small project minivim using ncurses
 - [x] File persistence
 - [ ] Word Completion
 - [ ] Search and Substitution
-- [ ] getopt()
