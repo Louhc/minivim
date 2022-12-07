@@ -1,0 +1,53 @@
+#ifndef _MINIVIM_H
+#define _MINIVIM_H
+
+#include <vector>
+#include <string>
+#include <ncurses.h>
+using std::vector;
+using std::string;
+
+#define win_col COLS
+#define win_row (LINES - 2)
+#define NORMAL_MODE 0
+#define INSERT_MODE 1
+
+struct node{
+    int x, y;
+    node();
+    node( int, int );
+};
+
+int max( int, int );
+int min( int, int );
+
+class textfile{
+    private:
+        vector<string> text;
+        string filename;
+        int x, y, ul, tx, ty;
+        bool is_changed;
+
+        node getPos( int, int, int );
+        string getNthLine( int );
+    public:
+        void refresh( int ); // refresh the window. If in insert_mode, use refresh(1)
+        textfile();
+        textfile( string );
+        void save();
+        void insert_to_normal();
+        void go_up( int );
+        void go_down( int );
+        void go_left( int );
+        void go_right( int );
+        void backspace();
+        void enter();
+        void insert( char );
+        void deleteline();
+};
+
+void NormalMode( textfile* );
+int CommandMode( textfile* );
+void InsertMode( textfile* );
+
+#endif
