@@ -19,5 +19,4 @@ This is a small project minivim using ncurses
 
 ### BUG LIST
 
-- [ ] Press ENTER on the last second line, it collapsed.
-- [ ] Press ENTER on the beginning of a long line(takes up 2 lines space)
+- [x] Press ENTER on the last second line, it collapsed. Press ENTER on the beginning of a long line(takes up 2 lines space)

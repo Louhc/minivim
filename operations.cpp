@@ -65,7 +65,7 @@ void textfile::enter(){
     if ( y == text[x].size() )
         text[x + 1] = "";
     else
-        text[x + 1] = text[x].substr(y, (int)text.size() - y),
+        text[x + 1] = text[x].substr(y),
         text[x] = text[x].substr(0, y);
     ++x; y = 0;
     ul = max(ul, getPos(INSERT_MODE, x, (int)text[x].size() - 1).x - win_row + 1);
