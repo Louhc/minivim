@@ -10,7 +10,11 @@ include_directories(${CURSES_INCLUDE_DIR})
 
 set(SRC_LIST src/minivim.cpp src/basic.cpp src/operations.cpp src/normal_mode.cpp src/insert_mode.cpp src/command_mode.cpp)
 
+<<<<<<< HEAD
 set(EXECUTABLE_OUTPUT_PATH ../bin)
+=======
+set(EXECUTABLE_OUTPUT_PATH bin)
+>>>>>>> 067a41fc6e69b6a7351cc95cb86443b4eb9e36bf
 
 add_executable(${PROJECT_NAME} ${SRC_LIST})
 
