@@ -15,3 +15,8 @@ This is a small project minivim using ncurses
 - [x] Line Number and Jump
 - [x] Shortcut Key
 - [x] Command History
+
+
+### BUG LIST
+
+- [ ] Press ENTER on the last second line, it collapsed.
