@@ -44,12 +44,16 @@ class textfile{
         void backspace();
         void enter();
         void insert( char );
-        void deleteline();
         bool is_changed();
         bool is_read_only();
         bool is_truncate();
         void replace( string, string );
         void jump( int );
+        void delete_line();
+        void move_to_the_beginning();
+        void move_to_the_end();
+        void move_forward();
+        void move_backward();
 };
 
 void NormalMode( textfile* );

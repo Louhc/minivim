@@ -67,7 +67,7 @@ textfile::textfile( string fname, bool flg1, bool flg2 ){
     readonly_on = flg1;
     truncate_on = flg2;
 
-    if ( fname == "" ){
+    if ( fname == "" || is_truncate() ){
         text.push_back("");
         old_text = text;
         refresh(NORMAL_MODE);

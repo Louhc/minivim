@@ -29,6 +29,21 @@ void NormalMode( textfile *txt ){
                 }
                 txt->refresh(NORMAL_MODE);
                 break;
+            case 'd':
+                if ( getch() == 'd' ) txt->delete_line();
+                break;
+            case 'O':
+                txt->move_to_the_beginning();
+                break;
+            case '$':
+                txt->move_to_the_end();
+                break;
+            case 'w':
+                txt->move_forward();
+                break;
+            case 'b':
+                txt->move_backward();
+                break;
         }
 
     }

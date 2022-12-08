@@ -8,10 +8,10 @@ This is a small project minivim using ncurses
 - [x] Multiple modes & Text Edit
 - [x] In-editor Commands
 - [x] Command line arguments
-- [ ] Truncate Mode
+- [x] Truncate Mode
 - [x] File persistence
 - [ ] Word Completion
 - [x] Search and Substitution
 - [x] Line Number and Jump
-- [ ] Shortcut Key
+- [x] Shortcut Key
 - [ ] Command History

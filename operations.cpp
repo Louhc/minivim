@@ -83,15 +83,6 @@ void textfile::insert( char ch ){
     refresh(INSERT_MODE);
 }
 
-void textfile::deleteline(){
-    for ( int i = x; i <= (int)text.size() - 2; --i )
-        text[i] = text[i + 1];
-    text[x].pop_back();
-    y = 0; x = min(x, (int)text.size() - 1);
-    ul = max(ul, getPos(INSERT_MODE, x, (int)text[x].size() - 1).x - win_row + 1);
-    refresh(NORMAL_MODE);
-}
-
 void textfile::replace( string s1, string s2 ){
     for ( auto &s : text ) for ( int j = 0; j <= (int)s.size() - (int)s1.size(); ++j ){
         if ( s.substr(j, s1.size()) == s1 ){
@@ -107,6 +98,37 @@ void textfile::replace( string s1, string s2 ){
 void textfile::jump( int ln ){
     x = ln - 1; y = 0;
     ul = min(ul, getPos(NORMAL_MODE, x, 0).x);
-    ul = max(ul, getPos(NORMAL_MODE, x, (int)text[x].size() - 1).x);
+    ul = max(ul, getPos(NORMAL_MODE, x, (int)text[x].size() - 1).x - win_row + 1);
+    refresh(NORMAL_MODE);
+}
+
+void textfile::delete_line(){
+    for ( int i = x; i <= (int)text.size() - 2; ++i )
+        text[i] = text[i + 1];
+    text.pop_back();
+    y = 0; x = min(x, (int)text.size() - 1);
+    ul = max(ul, getPos(NORMAL_MODE, x, (int)text[x].size() - 1).x - win_row + 1);
+    refresh(NORMAL_MODE);
+}
+
+void textfile::move_to_the_beginning(){
+    y = 0;
+    refresh(NORMAL_MODE);
+}
+
+void textfile::move_to_the_end(){
+    y = (int)text[x].size() - 1;
+    refresh(NORMAL_MODE);
+}
+
+void textfile::move_forward(){
+    while( y + 1 < text[x].size() && text[x][y] != ' ' ) ++y;
+    while( y + 1 < text[x].size() && text[x][y] == ' ' ) ++y;
+    refresh(NORMAL_MODE);
+}
+
+void textfile::move_backward(){
+    while( y > 0 && text[x][y] != ' ' ) --y;
+    while( y > 0 && text[x][y] == ' ' ) --y;
     refresh(NORMAL_MODE);
 }
