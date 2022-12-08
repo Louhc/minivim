@@ -1,7 +1,7 @@
-tmp.cpp
 .idea/
 .main.cpp.swo
 .main.cpp.swp
 .swp
 build/
 cmake-build-debug/
+bin/

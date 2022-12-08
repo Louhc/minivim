@@ -8,7 +8,9 @@ include_directories(include)
 find_package(Curses REQUIRED)
 include_directories(${CURSES_INCLUDE_DIR})
 
-set(SRC_LIST minivim.cpp basic.cpp operations.cpp normal_mode.cpp insert_mode.cpp command_mode.cpp)
+set(SRC_LIST src/minivim.cpp src/basic.cpp src/operations.cpp src/normal_mode.cpp src/insert_mode.cpp src/command_mode.cpp)
+
+set(EXECUTABLE_OUTPUT_PATH bin)
 
 add_executable(${PROJECT_NAME} ${SRC_LIST})
 
