@@ -12,3 +12,6 @@ This is a small project minivim using ncurses
 - [x] File persistence
 - [ ] Word Completion
 - [x] Search and Substitution
+- [x] Line Number and Jump
+- [ ] Shortcut Key
+- [ ] Command History

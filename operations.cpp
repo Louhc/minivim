@@ -103,3 +103,10 @@ void textfile::replace( string s1, string s2 ){
     x = y = ul = 0;
     refresh(NORMAL_MODE);
 }
+
+void textfile::jump( int ln ){
+    x = ln - 1; y = 0;
+    ul = min(ul, getPos(NORMAL_MODE, x, 0).x);
+    ul = max(ul, getPos(NORMAL_MODE, x, (int)text[x].size() - 1).x);
+    refresh(NORMAL_MODE);
+}

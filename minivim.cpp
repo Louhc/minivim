@@ -11,7 +11,7 @@ using std::string;
 #define REG_COLOR_NUM 1
 #define CUS_COLOR_NUM 2
 
-WINDOW *txtwin, *infowin, *cmdwin;
+WINDOW *txtwin, *infowin, *cmdwin, *lnwin;
 // extern int optind;
 
 int main( int argc, char *argv[] ){
@@ -28,7 +28,8 @@ int main( int argc, char *argv[] ){
     wrefresh(stdscr);
     
     // create and init the windows
-    txtwin = newwin(win_row, win_col, 0, 0);
+    lnwin = newwin(win_row, 3, 0, 0);
+    txtwin = newwin(win_row, win_col, 0, 3);
     infowin = newwin(1, COLS, win_row, 0);
     cmdwin = newwin(1, COLS, win_row + 1, 0);
     keypad(txtwin, true);

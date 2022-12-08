@@ -58,7 +58,26 @@ int CommandMode( textfile *txt ){
         }
         txt->replace(c2.substr(1, c2.size() - 2), c3.substr(1, c3.size() - 2));
         return 0;
-    } else {
+    } else if (c1 == "jmp" ){
+        iss >> c2;
+        bool is_number = 1;
+        for ( auto ch : c2 ) if ( ch > '9' || ch < '0' ){
+            is_number = 0; break;
+        }
+        int ln = 0;
+        if ( is_number ) for ( auto ch : c2 ) ln = ln * 10 + (ch & 15);
+        
+        if ( ln == 0 ){
+            wclear(infowin);
+            wprintw(infowin, "Format error");
+            wrefresh(infowin);
+            getch();
+            return 0;
+        }
+        txt->jump(ln);
+        return 0;
+    }
+    else {
         wclear(infowin);
         wprintw(infowin, "Format error");
         wrefresh(infowin);

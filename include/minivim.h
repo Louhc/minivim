@@ -7,7 +7,7 @@
 using std::vector;
 using std::string;
 
-#define win_col COLS
+#define win_col (COLS - 3)
 #define win_row (LINES - 2)
 #define NORMAL_MODE 0
 #define INSERT_MODE 1
@@ -31,7 +31,7 @@ class textfile{
         bool truncate_on;
 
         node getPos( int, int, int );
-        string getNthLine( int );
+        string getNthLine( int, int &, int & );
     public:
         void refresh( int ); // refresh the window. If in insert_mode, use refresh(1)
         textfile( string, bool, bool );
@@ -49,6 +49,7 @@ class textfile{
         bool is_read_only();
         bool is_truncate();
         void replace( string, string );
+        void jump( int );
 };
 
 void NormalMode( textfile* );

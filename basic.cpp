@@ -10,7 +10,7 @@ using std::vector;
 #define REG_COLOR_NUM 1
 #define CUS_COLOR_NUM 2
 
-extern WINDOW *txtwin, *infowin, *cmdwin;
+extern WINDOW *txtwin, *infowin, *cmdwin, *lnwin;
 
 node::node():x(0), y(0){}
 node::node( int a, int b ):x(a), y(b){}
@@ -26,12 +26,15 @@ node textfile::getPos( int mode, int tx, int ty ){
     return r;
 }
 
-string textfile::getNthLine( int n ){
+string textfile::getNthLine( int n, int &t1, int &t2 ){
     for ( int i = 0; i < (int)text.size(); ++i ){
-        if ( text[i].size() >= n * win_col )
+        if ( text[i].size() >= n * win_col ){
+            t1 = n; t2 = i;
             return text[i].substr(n * win_col, min(win_col, (int)text[i].size() - n * win_col));
+        }
         n -= ((int)text[i].size() - 1) / win_col + 1;
     }
+    t1 = t2 = -1;
     return "";
 }
 
@@ -40,16 +43,19 @@ void textfile::refresh( int mode ){
     wclear(infowin);
     if ( mode == INSERT_MODE ) wmove(infowin, 0, 0), wprintw(infowin, "-- INSERT --");
     wmove(infowin, 0, COLS - 17);
-    if ( text[x].size() == 0 ) wprintw(infowin, "%d,0-1", x);
-    else wprintw(infowin, "%d,%d", x, y);
+    if ( text[x].size() == 0 ) wprintw(infowin, "%d,0-1", x + 1);
+    else wprintw(infowin, "%d,%d", x + 1, y);
     wrefresh(infowin);
 
     // refresh the text window
-    wclear(txtwin);
+    wclear(txtwin); wclear(lnwin);
     for ( int i = 0; i < win_row; ++i ){
-        wmove(txtwin, i, 0);
-        wprintw(txtwin, "%s", getNthLine(ul + i).c_str());
+        wmove(txtwin, i, 0); wmove(lnwin, i, 0);
+        int t1, t2;
+        wprintw(txtwin, "%s", getNthLine(ul + i, t1, t2).c_str());
+        if ( t1 == 0 ) wprintw(lnwin, "%d", t2 + 1);
     }
+    wrefresh(lnwin);
     node t(getPos(mode, x, y));
     wmove(txtwin, t.x - ul, t.y);
     wrefresh(txtwin);
