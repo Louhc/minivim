@@ -11,4 +11,4 @@ This is a small project minivim using ncurses
 - [ ] Truncate Mode
 - [x] File persistence
 - [ ] Word Completion
-- [ ] Search and Substitution
+- [x] Search and Substitution

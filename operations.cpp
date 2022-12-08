@@ -91,3 +91,15 @@ void textfile::deleteline(){
     ul = max(ul, getPos(INSERT_MODE, x, (int)text[x].size() - 1).x - win_row + 1);
     refresh(NORMAL_MODE);
 }
+
+void textfile::replace( string s1, string s2 ){
+    for ( auto &s : text ) for ( int j = 0; j <= (int)s.size() - (int)s1.size(); ++j ){
+        if ( s.substr(j, s1.size()) == s1 ){
+            if ( j + s1.size() == s.size() ) s = s.substr(0, j) + s2;
+            else s = s.substr(0, j) + s2 + s.substr(j + (int)s1.size(), (int)s.size() - j - (int)s1.size());
+            j += (int)s2.size() - 1;
+        }
+    }
+    x = y = ul = 0;
+    refresh(NORMAL_MODE);
+}

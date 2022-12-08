@@ -48,6 +48,7 @@ class textfile{
         bool is_changed();
         bool is_read_only();
         bool is_truncate();
+        void replace( string, string );
 };
 
 void NormalMode( textfile* );
