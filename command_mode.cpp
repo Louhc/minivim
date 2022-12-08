@@ -6,26 +6,67 @@
 
 extern WINDOW *txtwin, *infowin, *cmdwin;
 
+
 int CommandMode( textfile *txt ){
+    static vector<string> h_cmd;
+    
     wclear(cmdwin);
     wprintw(cmdwin, ":");
     wrefresh(cmdwin);
-    std::string cmd, c1, c2, c3;
-    int ch;
+    
+    vector<string> cmd = h_cmd;
+    cmd.push_back("");
+    string c1, c2, c3;
+    
+    int ch, x = 0, y = (int)cmd.size() - 1;
     while( (ch = getch()) != 10 ){
-        if ( ch == 27 ){
-            wclear(cmdwin);
-            wrefresh(cmdwin);
-            return 0;
+        switch( ch ){
+            case 27:
+                wclear(cmdwin);
+                wrefresh(cmdwin);
+                return 0;
+                break;
+            case KEY_LEFT:
+                if ( x > 0 ) --x;
+                break;
+            case KEY_RIGHT:
+                if ( x + 1 < cmd[y].size() ) ++x;
+                break;
+            case KEY_UP:
+                if ( y > 0 ){
+                    --y;
+                    x = cmd[y].size();
+                }
+                break;
+            case KEY_DOWN:
+                if ( y + 1 < cmd.size() ){
+                    ++y;
+                    x = cmd[y].size();
+                }
+                break;
+            case KEY_BACKSPACE:
+                if ( x > 0 ){
+                    if ( x == cmd[y].size() ) cmd[y].pop_back();
+                    else cmd[y] = cmd[y].substr(0, x - 1) + cmd[y].substr(x + 1);
+                    --x;
+                }
+                break;
+            default:
+                if ( x == cmd[y].size() ) cmd[y].push_back((char)ch);
+                else cmd[y] = cmd[y].substr(0, x) + (char)ch + cmd[y].substr(x + 1);
+                ++x;
+                break;
         }
-        cmd += (char)ch;
-        wprintw(cmdwin, "%c", ch);
+        wclear(cmdwin);
+        wprintw(cmdwin, ":%s", cmd[y].c_str());
+        wmove(cmdwin, 0, x + 1);
         wrefresh(cmdwin);
     }
     wclear(cmdwin);
     wrefresh(cmdwin);
 
-    std::istringstream iss(cmd);
+    h_cmd.push_back(cmd[y]);
+    std::istringstream iss(cmd[y]);
     iss >> c1;
 
     if ( c1 == "w" ){

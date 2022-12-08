@@ -14,4 +14,4 @@ This is a small project minivim using ncurses
 - [x] Search and Substitution
 - [x] Line Number and Jump
 - [x] Shortcut Key
-- [ ] Command History
+- [x] Command History
