@@ -8,7 +8,7 @@ This is a small project minivim using ncurses
 - [x] Multiple modes & Text Edit
 - [x] In-editor Commands
 - [x] Command line arguments
-- [x] Truncate Mode
+- [ ] Truncate Mode
 - [x] File persistence
 - [ ] Word Completion
 - [x] Search and Substitution
