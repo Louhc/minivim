@@ -15,6 +15,7 @@ This is a small project minivim using ncurses
 - [x] Line Number and Jump
 - [x] Shortcut Key
 - [x] Command History
+- [ ] Deal with the tabs
 
 
 ### BUG LIST
