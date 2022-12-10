@@ -7,10 +7,13 @@
 using std::vector;
 using std::string;
 
+
 #define win_col (COLS - 3)
 #define win_row (LINES - 2)
 #define NORMAL_MODE 0
 #define INSERT_MODE 1
+
+#define TAB_WIDTH 4
 
 struct node{
     int x, y;

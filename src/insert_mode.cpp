@@ -25,7 +25,8 @@ void InsertMode( textfile *txt ){
                 txt->enter();
                 break;
             default:
-                txt->insert(ch);
+                if ( ch == '\t' ) for ( int i = 0; i < TAB_WIDTH; ++i ) txt->insert(' ');
+                else txt->insert(ch);
                 break;
         }
     }
