@@ -29,7 +29,7 @@ void textfile::go_right( int mode ){
 
 void textfile::insert_to_normal(){
     y = min(y, max((int)text[x].size() - 1, 0));
-    wclear(infowin);
+    werase(infowin);
     wmove(infowin, 0, COLS - 17);
     wprintw(infowin, "%d,%d", x, y);
     wrefresh(infowin);
@@ -96,6 +96,7 @@ void textfile::replace( string s1, string s2 ){
 }
 
 void textfile::jump( int ln ){
+    ln = min(ln, text.size());
     x = ln - 1; y = 0;
     ul = min(ul, getPos(NORMAL_MODE, x, 0).x);
     ul = max(ul, getPos(NORMAL_MODE, x, (int)text[x].size() - 1).x - win_row + 1);

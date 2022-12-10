@@ -10,7 +10,7 @@ extern WINDOW *txtwin, *infowin, *cmdwin;
 int CommandMode( textfile *txt ){
     static vector<string> h_cmd;
     
-    wclear(cmdwin);
+    werase(cmdwin);
     wprintw(cmdwin, ":");
     wrefresh(cmdwin);
     
@@ -22,7 +22,7 @@ int CommandMode( textfile *txt ){
     while( (ch = getch()) != 10 ){
         switch( ch ){
             case 27:
-                wclear(cmdwin);
+                werase(cmdwin);
                 wrefresh(cmdwin);
                 return 0;
                 break;
@@ -57,12 +57,12 @@ int CommandMode( textfile *txt ){
                 ++x;
                 break;
         }
-        wclear(cmdwin);
+        werase(cmdwin);
         wprintw(cmdwin, ":%s", cmd[y].c_str());
         wmove(cmdwin, 0, x + 1);
         wrefresh(cmdwin);
     }
-    wclear(cmdwin);
+    werase(cmdwin);
     wrefresh(cmdwin);
 
     h_cmd.push_back(cmd[y]);
@@ -76,7 +76,7 @@ int CommandMode( textfile *txt ){
         return 0;
     } else if ( c1 == "q" ){
         if ( !txt->is_changed() ) return 1;
-        wclear(infowin);
+        werase(infowin);
         wprintw(infowin, "File not saved (add ! to override)");
         wrefresh(infowin);
         getch();
@@ -91,7 +91,7 @@ int CommandMode( textfile *txt ){
     } else if ( c1 == "sub" ) {
         iss >> c2; iss >> c3;
         if ( c2.size() <= 2 || c3.size() < 2 || c2[0] != '\"' || c2[(int)c2.size() - 1] != '\"' || c3[0] != '\"' || c3[(int)c3.size() - 1] != '\"' ){
-            wclear(infowin);
+            werase(infowin);
             wprintw(infowin, "Format error");
             wrefresh(infowin);
             getch();
@@ -109,7 +109,7 @@ int CommandMode( textfile *txt ){
         if ( is_number ) for ( auto ch : c2 ) ln = ln * 10 + (ch & 15);
         
         if ( ln == 0 ){
-            wclear(infowin);
+            werase(infowin);
             wprintw(infowin, "Format error");
             wrefresh(infowin);
             getch();
@@ -119,7 +119,7 @@ int CommandMode( textfile *txt ){
         return 0;
     }
     else {
-        wclear(infowin);
+        werase(infowin);
         wprintw(infowin, "Format error");
         wrefresh(infowin);
         getch();

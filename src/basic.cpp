@@ -40,7 +40,7 @@ string textfile::getNthLine( int n, int &t1, int &t2 ){
 
 void textfile::refresh( int mode ){
     // refresh the info window
-    wclear(infowin);
+    werase(infowin);
     if ( mode == INSERT_MODE ) wmove(infowin, 0, 0), wprintw(infowin, "-- INSERT --");
     wmove(infowin, 0, COLS - 17);
     if ( text[x].size() == 0 ) wprintw(infowin, "%d,0-1", x + 1);
@@ -48,7 +48,7 @@ void textfile::refresh( int mode ){
     wrefresh(infowin);
 
     // refresh the text window
-    wclear(txtwin); wclear(lnwin);
+    werase(txtwin); werase(lnwin);
     for ( int i = 0; i < win_row; ++i ){
         wmove(txtwin, i, 0); wmove(lnwin, i, 0);
         int t1, t2;
@@ -95,14 +95,14 @@ textfile::textfile( string fname, bool flg1, bool flg2 ){
 bool textfile::save( string fname ){
     if ( fname != "" ) filename = fname;
     if ( filename == "" ){
-        wclear(infowin);
+        werase(infowin);
         wprintw(infowin, "No file name.");
         wrefresh(infowin);
         return 0;
     }
     std::ofstream fout(filename);
     if ( !fout.is_open() ){
-        wclear(infowin);
+        werase(infowin);
         wprintw(infowin, "Unable to open %s.", filename.c_str());
         wrefresh(infowin);
         return 0;
@@ -110,7 +110,7 @@ bool textfile::save( string fname ){
     old_text = text;
     for ( int i = 0; i < text.size(); ++i )
         fout << text[i] + "\n";
-    wclear(infowin);
+    werase(infowin);
     wprintw(infowin, "%s saved successfully.", filename.c_str());
     return 1;
 }
@@ -125,7 +125,7 @@ bool textfile::is_changed(){
 
 bool textfile::is_read_only(){
     if ( !readonly_on ) return 0;
-    wclear(infowin);
+    werase(infowin);
     wprintw(infowin, "Unable to modify a read_only file!");
     wrefresh(infowin);
     getch();
