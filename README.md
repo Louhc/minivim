@@ -16,6 +16,7 @@ This is a small project minivim using ncurses
 - [x] Shortcut Key
 - [x] Command History
 - [x] Deal with the tabs (to be optimized)
+- [ ] Add color theme
 
 
 ### BUG LIST
