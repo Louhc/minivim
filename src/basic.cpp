@@ -116,7 +116,7 @@ bool textfile::save( string fname ){
 }
 
 bool textfile::is_changed(){
-    if ( text.size() != old_text.size() ) return 0;
+    if ( text.size() != old_text.size() ) return 1;
     for ( int i = 0; i < text.size(); ++i )
         if ( text[i] != old_text[i] )
             return 1;
