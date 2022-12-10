@@ -8,7 +8,7 @@ This is a small project minivim using ncurses
 - [x] Multiple modes & Text Edit
 - [x] In-editor Commands
 - [x] Command line arguments
-- [ ] Truncate Mode
+- [x] Truncate Mode
 - [x] File persistence
 - [ ] Word Completion
 - [x] Search and Substitution
@@ -21,4 +21,4 @@ This is a small project minivim using ncurses
 ### BUG LIST
 
 - [x] Press ENTER on the last second line, it collapsed. Press ENTER on the beginning of a long line(takes up 2 lines space)
-- [ ] Shortcut Key w&b is incorrect
+- [x] Shortcut Key w&b is incorrect

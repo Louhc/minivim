@@ -85,6 +85,7 @@ textfile::textfile( string fname, bool flg1, bool flg2 ){
     string s;
     while( !fin.eof() ){
         std::getline(fin, s);
+        if ( s.size() > 0 && s[s.size() - 1] == '\r' ) s.pop_back();
         text.push_back(s);
     }
     old_text = text;
