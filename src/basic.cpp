@@ -109,9 +109,11 @@ bool textfile::save( string fname ){
     }
     old_text = text;
     for ( int i = 0; i < text.size(); ++i )
-        fout << text[i] + "\n";
+        if ( i + 1 == text.size() ) fout << text[i];
+        else fout << text[i] + '\n';
     werase(infowin);
     wprintw(infowin, "%s saved successfully.", filename.c_str());
+    wrefresh(infowin);
     return 1;
 }
 

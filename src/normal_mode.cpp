@@ -30,7 +30,8 @@ void NormalMode( textfile *txt ){
                 txt->refresh(NORMAL_MODE);
                 break;
             case 'd':
-                if ( getch() == 'd' ) txt->delete_line();
+                if ( getch() == 'd' ) if ( !(txt->is_read_only()) ) txt->delete_line();
+                txt->refresh(NORMAL_MODE);
                 break;
             case 'O':
                 txt->move_to_the_beginning();
