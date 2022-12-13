@@ -123,6 +123,7 @@ void textfile::move_to_the_end(){
 }
 
 void textfile::move_forward(){
+    y = min(y, (int)text[x].size() - 1);
     while ( y + 1 < text[x].size() && text[x][y] != ' ' ) ++y;
     while ( 1 ){
         if ( y + 1 < text[x].size() && text[x][y] == ' ' ) ++y;
@@ -130,11 +131,12 @@ void textfile::move_forward(){
         else break;
     }
     y = min(y, (int)text[x].size() - 1);
-    ul = max(ul, getPos(INSERT_MODE, x, (int)text[x].size() - 1).x - win_row + 1);
+    ul = max(ul, getPos(NORMAL_MODE, x, (int)text[x].size() - 1).x - win_row + 1);
     refresh(NORMAL_MODE);
 }
 
 void textfile::move_backward(){
+    y = min(y, (int)text[x].size() - 1);
     while ( y >= 0 && text[x][y] != ' ' ) --y;
     while ( 1 ){
         if ( y >= 0  && text[x][y] == ' ' ) --y;
@@ -142,5 +144,6 @@ void textfile::move_backward(){
         else break;
     }
     if ( text[x].size() > 0 && y < 0 ) y = 0;
+    ul = min(ul, getPos(NORMAL_MODE, x, 0).x);
     refresh(NORMAL_MODE);
 }
