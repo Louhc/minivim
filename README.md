@@ -1,5 +1,7 @@
 # Welcome To MINIVIM!
 
+> by louhc
+
 This is a small project minivim using ncurses
 
 ### TO-DO LIST
